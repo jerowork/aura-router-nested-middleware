@@ -36,7 +36,8 @@ $map->get('home', '/', [
 $map->get('blog', '/blog', new BlogAction());
 ```
 
-From now on every http action has to implement ```Interop\Http\ServerMiddleware\MiddlewareInterface```.
+### Http actions with PSR-15 implementation
+From now on every http action can implement ```Interop\Http\ServerMiddleware\MiddlewareInterface```.
 
 Example action:
 ```php
