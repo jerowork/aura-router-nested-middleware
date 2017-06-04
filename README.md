@@ -9,8 +9,6 @@ $ composer require jerowork/aura-router-nested-middleware:dev-master
 
 ## Usage
 ```php
-<?php declare(strict_types=1);
-
 use Aura\Router\RouterContainer;
 use Jerowork\AuraRouterNestedMiddleware\AuraRouterNestedMiddleware;
 use Jerowork\AuraRouterNestedMiddleware\MiddlewarePipe\StratigilityMiddlewarePipe;
@@ -41,8 +39,6 @@ $map->get('blog', '/blog', new BlogAction());
 A http action has to implement ```Interop\Http\ServerMiddleware\MiddlewareInterface```.
 Example:
 ```php
-<?php declare(strict_types=1);
-
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 
 class HomeAction implements MiddlewareInterface
