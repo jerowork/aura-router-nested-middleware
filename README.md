@@ -36,8 +36,9 @@ $map->get('home', '/', [
 $map->get('blog', '/blog', new BlogAction());
 ```
 
-A http action has to implement ```Interop\Http\ServerMiddleware\MiddlewareInterface```.
-Example:
+From now on every http action has to implement ```Interop\Http\ServerMiddleware\MiddlewareInterface```.
+
+Example action:
 ```php
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 
