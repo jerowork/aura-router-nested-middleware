@@ -26,14 +26,16 @@ $middleware[] = new AuraRouterNestedMiddleware(
 );
 
 // add routes with middleware
-$router->get('home', '/', [
+$map = $router->getMap();
+
+$map->get('home', '/', [
     new SomeMiddleware(),
     new AnotherMiddleware(),
     new HomeAction(),
 ]);
 
 // route with no other middleware than the blog action
-$router->get('blog', '/blog', new BlogAction());
+$map->get('blog', '/blog', new BlogAction());
 ```
 
 A http action has to implement ```Interop\Http\ServerMiddleware\MiddlewareInterface```.
