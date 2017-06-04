@@ -43,8 +43,8 @@ final class AuraRouterNestedMiddleware implements MiddlewareInterface
         }
 
         // add query parameters to request
-        foreach ($route->attributes as $key => $val) {
-            $request = $request->withAttribute($key, $val);
+        foreach ($route->attributes as $key => $value) {
+            $request = $request->withAttribute($key, $value);
         }
 
         // get route handlers
