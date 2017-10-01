@@ -26,7 +26,7 @@ final class StratigilityMiddlewarePipe implements MiddlewarePipeInterface
     /**
      * @inheritDoc
      */
-    public function pipe(MiddlewareInterface $middleware): void
+    public function pipe(MiddlewareInterface $middleware)
     {
         $this->middlewarePipe->pipe($middleware);
     }

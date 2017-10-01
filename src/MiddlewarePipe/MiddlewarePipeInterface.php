@@ -16,7 +16,7 @@ interface MiddlewarePipeInterface
      *
      * @param MiddlewareInterface $middleware
      */
-    public function pipe(MiddlewareInterface $middleware): void;
+    public function pipe(MiddlewareInterface $middleware);
 
     /**
      * Process middleware pipe.
