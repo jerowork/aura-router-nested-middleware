@@ -4,7 +4,7 @@ PSR-15 middleware for Aura Router with nested-middleware route handling.
 ## Installation
 Install via Composer: 
 ```
-$ composer require jerowork/aura-router-nested-middleware:dev-master
+$ composer require jerowork/aura-router-nested-middleware
 ```
 
 ## Usage
