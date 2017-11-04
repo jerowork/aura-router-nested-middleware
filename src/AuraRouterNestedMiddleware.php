@@ -51,8 +51,8 @@ final class AuraRouterNestedMiddleware implements MiddlewareInterface
         $handlers = !is_array($route->handler) ? [$route->handler] : $route->handler;
 
         // add route handlers to middleware pipe
-        foreach ($handlers as $handler) {
-            $this->middlewarePipe->pipe($handler);
+        foreach ($handlers as $routeHandler) {
+            $this->middlewarePipe->pipe($routeHandler);
         }
 
         // process middleware pipe
