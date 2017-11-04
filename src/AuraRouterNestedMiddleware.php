@@ -3,11 +3,13 @@
 namespace Jerowork\AuraRouterNestedMiddleware;
 
 use Aura\Router\RouterContainer;
-use Interop\Http\Server\MiddlewareInterface;
-use Interop\Http\Server\RequestHandlerInterface;
+use Webimpress\HttpMiddlewareCompatibility\HandlerInterface;
+use Webimpress\HttpMiddlewareCompatibility\MiddlewareInterface;
 use Jerowork\AuraRouterNestedMiddleware\Exception\RouteNotFoundException;
 use Jerowork\AuraRouterNestedMiddleware\MiddlewarePipe\MiddlewarePipeInterface;
 use Psr\Http\Message\ServerRequestInterface;
+
+use const Webimpress\HttpMiddlewareCompatibility\HANDLER_METHOD;
 
 /**
  * Class AuraRouterNestedMiddleware.
@@ -33,7 +35,7 @@ final class AuraRouterNestedMiddleware implements MiddlewareInterface
     /**
      * @inheritDoc
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler)
+    public function process(ServerRequestInterface $request, HandlerInterface $handler)
     {
         // get route
         $route = $this->routeContainer->getMatcher()->match($request);
@@ -56,6 +58,6 @@ final class AuraRouterNestedMiddleware implements MiddlewareInterface
         }
 
         // process middleware pipe
-        return $this->middlewarePipe->process($request, $handler->handle($request));
+        return $this->middlewarePipe->process($request, $handler->{HANDLER_METHOD}($request));
     }
 }

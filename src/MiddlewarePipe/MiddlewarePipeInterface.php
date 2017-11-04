@@ -2,7 +2,7 @@
 
 namespace Jerowork\AuraRouterNestedMiddleware\MiddlewarePipe;
 
-use Interop\Http\Server\MiddlewareInterface;
+use Webimpress\HttpMiddlewareCompatibility\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
