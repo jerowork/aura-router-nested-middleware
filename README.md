@@ -9,7 +9,7 @@ $ composer require jerowork/aura-router-nested-middleware
 
 __NOTE about http-interop/http-middleware__
 
-This package make use of Zend Stratigility as middleware pipe. Since Stratigility 2.1 you have to explicitly define an http-interop/http-middleware dependency in your composer.json. Depending on the used version of jerowork/aura-router-nested-middleware you have to choose:
+This package uses Zend Stratigility as middleware pipe. Since Stratigility 2.1 you have to explicitly define an http-interop/http-middleware dependency in your composer.json. Depending on the used version of jerowork/aura-router-nested-middleware you have to choose:
 
 |jerowork/aura-router-nested-middleware|http-interop/http-middleware|
 |--|--|
