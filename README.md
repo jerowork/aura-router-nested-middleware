@@ -16,7 +16,7 @@ This package make use of Zend Stratigility as middleware pipe. Since Stratigilit
 |0.1.2|0.4.1|
 |0.2.0|0.5.0|
 
-## Usage (v0.2.0)
+## Usage
 ```php
 use Aura\Router\RouterContainer;
 use Jerowork\AuraRouterNestedMiddleware\AuraRouterNestedMiddleware;
