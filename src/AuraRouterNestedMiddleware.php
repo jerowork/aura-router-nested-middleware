@@ -6,6 +6,7 @@ use Aura\Router\RouterContainer;
 use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
 use Jerowork\AuraRouterNestedMiddleware\Exception\RouteNotFoundException;
+use Jerowork\AuraRouterNestedMiddleware\Middleware\ParentRequestHandlerMiddleware;
 use Jerowork\MiddlewareDispatcher\Middleware\FinalResponseMiddleware;
 use Jerowork\MiddlewareDispatcher\MiddlewareRequestHandler;
 use Psr\Http\Message\ResponseInterface;
@@ -46,13 +47,13 @@ final class AuraRouterNestedMiddleware implements MiddlewareInterface
             $request = $request->withAttribute($key, $value);
         }
 
-        // get route handlers
-        $handlers = !is_array($route->handler) ? [$route->handler] : $route->handler;
+        // get route middleware
+        $middlewares = !is_array($route->handler) ? [$route->handler] : $route->handler;
 
-        // add main pipeline response to nested middleware stack
-        $handlers[] = new FinalResponseMiddleware($handler->handle($request));
+        // add remaining parent middlewares to nested middleware stack
+        $middlewares[] = new ParentRequestHandlerMiddleware($handler);
 
         // add and process route handlers via middleware request handler
-        return (new MiddlewareRequestHandler($handlers))->handle($request);
+        return (new MiddlewareRequestHandler($middlewares))->handle($request);
     }
 }
