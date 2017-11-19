@@ -3,13 +3,13 @@
 namespace Jerowork\AuraRouterNestedMiddleware;
 
 use Aura\Router\RouterContainer;
-use Webimpress\HttpMiddlewareCompatibility\HandlerInterface;
-use Webimpress\HttpMiddlewareCompatibility\MiddlewareInterface;
+use Interop\Http\Server\MiddlewareInterface;
+use Interop\Http\Server\RequestHandlerInterface;
 use Jerowork\AuraRouterNestedMiddleware\Exception\RouteNotFoundException;
-use Jerowork\AuraRouterNestedMiddleware\MiddlewarePipe\MiddlewarePipeInterface;
+use Jerowork\MiddlewareDispatcher\Middleware\FinalResponseMiddleware;
+use Jerowork\MiddlewareDispatcher\MiddlewareRequestHandler;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-
-use const Webimpress\HttpMiddlewareCompatibility\HANDLER_METHOD;
 
 /**
  * Class AuraRouterNestedMiddleware.
@@ -19,23 +19,23 @@ final class AuraRouterNestedMiddleware implements MiddlewareInterface
     /** @var RouterContainer */
     private $routeContainer;
 
-    /** @var MiddlewarePipeInterface */
-    private $middlewarePipe;
+    /** @var RequestHandlerInterface */
+    private $requestHandler;
 
     /**
      * @param RouterContainer $routeContainer
-     * @param MiddlewarePipeInterface $middlewarePipe
+     * @param RequestHandlerInterface $requestHandler
      */
-    public function __construct(RouterContainer $routeContainer, MiddlewarePipeInterface $middlewarePipe)
+    public function __construct(RouterContainer $routeContainer, RequestHandlerInterface $requestHandler)
     {
         $this->routeContainer = $routeContainer;
-        $this->middlewarePipe = $middlewarePipe;
+        $this->requestHandler = $requestHandler;
     }
 
     /**
      * @inheritDoc
      */
-    public function process(ServerRequestInterface $request, HandlerInterface $handler)
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         // get route
         $route = $this->routeContainer->getMatcher()->match($request);
@@ -52,12 +52,10 @@ final class AuraRouterNestedMiddleware implements MiddlewareInterface
         // get route handlers
         $handlers = !is_array($route->handler) ? [$route->handler] : $route->handler;
 
-        // add route handlers to middleware pipe
-        foreach ($handlers as $routeHandler) {
-            $this->middlewarePipe->pipe($routeHandler);
-        }
+        // add main pipeline response to nested middleware stack
+        $handlers[] = new FinalResponseMiddleware($handler->handle($request));
 
-        // process middleware pipe
-        return $this->middlewarePipe->process($request, $handler->{HANDLER_METHOD}($request));
+        // add and process route handlers via middleware request handler
+        return (new MiddlewareRequestHandler($handlers))->handle($request);
     }
 }
