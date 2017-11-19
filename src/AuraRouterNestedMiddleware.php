@@ -19,21 +19,18 @@ final class AuraRouterNestedMiddleware implements MiddlewareInterface
     /** @var RouterContainer */
     private $routeContainer;
 
-    /** @var RequestHandlerInterface */
-    private $requestHandler;
-
     /**
      * @param RouterContainer $routeContainer
-     * @param RequestHandlerInterface $requestHandler
      */
-    public function __construct(RouterContainer $routeContainer, RequestHandlerInterface $requestHandler)
+    public function __construct(RouterContainer $routeContainer)
     {
         $this->routeContainer = $routeContainer;
-        $this->requestHandler = $requestHandler;
     }
 
     /**
      * @inheritDoc
+     *
+     * @throws RouteNotFoundException
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
