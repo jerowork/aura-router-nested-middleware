@@ -7,25 +7,16 @@ Install via Composer:
 $ composer require jerowork/aura-router-nested-middleware
 ```
 
-__NOTE about http-interop/http-middleware__
-
-This package uses Zend Stratigility as middleware pipe. Since Stratigility 2.1 you have to explicitly define an http-interop/http-middleware dependency in your composer.json.
-
 ## Usage
 ```php
 use Aura\Router\RouterContainer;
 use Jerowork\AuraRouterNestedMiddleware\AuraRouterNestedMiddleware;
-use Jerowork\AuraRouterNestedMiddleware\MiddlewarePipe\StratigilityMiddlewarePipe;
-use Zend\Stratigility\MiddlewarePipe;
 
 // setup Aura Router
 $router = new RouteContainer();
 
 // add middleware to your general middleware queue
-$middleware[] = new AuraRouterNestedMiddleware(
-    $router,
-    new StratigilityMiddlewarePipe(new MiddlewarePipe())
-);
+$middleware[] = new AuraRouterNestedMiddleware($router);
 
 // add routes with middleware
 $map = $router->getMap();
@@ -52,7 +43,7 @@ class HomeAction implements MiddlewareInterface
     /**
      * @inheritDoc
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler)
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $response = $handler->handle($request);
         $response->getBody()->write('Hello world!');
