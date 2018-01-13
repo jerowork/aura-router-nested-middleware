@@ -7,14 +7,10 @@ use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
 use Jerowork\AuraRouterNestedMiddleware\Exception\RouteNotFoundException;
 use Jerowork\AuraRouterNestedMiddleware\Middleware\ParentRequestHandlerMiddleware;
-use Jerowork\MiddlewareDispatcher\Middleware\FinalResponseMiddleware;
 use Jerowork\MiddlewareDispatcher\MiddlewareRequestHandler;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-/**
- * Class AuraRouterNestedMiddleware.
- */
 final class AuraRouterNestedMiddleware implements MiddlewareInterface
 {
     /** @var RouterContainer */
