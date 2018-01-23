@@ -2,9 +2,6 @@
 
 namespace Jerowork\AuraRouterNestedMiddleware\Exception;
 
-/**
- * Class RouteNotFoundException.
- */
 class RouteNotFoundException extends \Exception
 {
 }

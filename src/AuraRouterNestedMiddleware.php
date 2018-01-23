@@ -3,13 +3,13 @@
 namespace Jerowork\AuraRouterNestedMiddleware;
 
 use Aura\Router\RouterContainer;
-use Interop\Http\Server\MiddlewareInterface;
-use Interop\Http\Server\RequestHandlerInterface;
 use Jerowork\AuraRouterNestedMiddleware\Exception\RouteNotFoundException;
 use Jerowork\AuraRouterNestedMiddleware\Middleware\ParentRequestHandlerMiddleware;
 use Jerowork\MiddlewareDispatcher\MiddlewareRequestHandler;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 final class AuraRouterNestedMiddleware implements MiddlewareInterface
 {
