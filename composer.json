@@ -1,8 +1,14 @@
 {
     "name": "jerowork/aura-router-nested-middleware",
-    "description": "PSR-15 middleware for Aura Router with nested-middleware route handling",
-    "keywords": ["PSR-7", "PSR-15", "middleware"],
     "type": "library",
+    "description": "PSR-15 middleware for Aura Router with nested-middleware route handling",
+    "keywords": [
+        "PSR-7",
+        "PSR-15",
+        "middleware",
+        "router",
+        "aura"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -11,6 +17,18 @@
             "homepage": "https://jero.work"
         }
     ],
+    "require": {
+        "php": "^7.0",
+        "aura/router": "^3.1",
+        "jerowork/middleware-request-handler": "^0.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5",
+        "zendframework/zend-diactoros": "^1.7"
+    },
+    "config": {
+        "sort-packages": true
+    },
     "autoload": {
         "psr-4": {
             "Jerowork\\AuraRouterNestedMiddleware\\": "src/"
@@ -20,17 +38,5 @@
         "psr-4": {
             "Jerowork\\AuraRouterNestedMiddleware\\Test\\": "tests/"
         }
-    },
-    "require": {
-        "php": "^7.0",
-        "aura/router": "^3.1",
-        "jerowork/middleware-request-handler": "^0.2"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^6.5",
-        "zendframework/zend-diactoros": "^1.7"
-    },
-    "config": {
-        "sort-packages": true
     }
 }
