@@ -23,7 +23,7 @@
         "jerowork/middleware-request-handler": "^0.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.5",
+        "phpunit/phpunit": "^6.5 || ^7.0",
         "zendframework/zend-diactoros": "^1.7 || ^2.0"
     },
     "config": {
