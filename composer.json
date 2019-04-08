@@ -20,7 +20,7 @@
     "require": {
         "php": "^7.0",
         "aura/router": "^3.1",
-        "jerowork/middleware-request-handler": "^0.4"
+        "jerowork/middleware-request-handler": "^0.4 || ^0.5"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0",
